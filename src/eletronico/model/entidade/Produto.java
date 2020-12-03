@@ -10,5 +10,5 @@ package eletronico.model.entidade;
  * @author edson
  */
 public class Produto {
-    
+    private int codProduto;
 }
