@@ -58,44 +58,7 @@ public class MarcaDao {
         return lista;
     }
      
-      public List<Marca> listarMarca(String nome){
-        List<Marca> lista = new ArrayList<Marca>();
-        
-        try{
-            Class
-           .forName("com.mysql.jdbc.Driver");
-            Connection con = 
-              DriverManager
-                .getConnection
-                ("jdbc:mysql://localhost:3306/produtos_eletronicos", 
-                 "root", "");
-            String sql = "select * "
-                + "from marca "
-                + "where nome like ? "    
-                + "order by nome";
-            
-            PreparedStatement ps = 
-                con.prepareStatement(sql);
-            ps.setString(1, 
-                   "%" + nome +
-                   "%");
-            ResultSet rs = ps.executeQuery();
-            
-            Marca m = null;
-            while(rs.next()){
-                m = new Marca();
-                m.setCodMarca(rs.getInt("codMarca"));
-                m.setNome(rs.getString("nome"));
-
-                lista.add(m);
-            }
-            
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        return lista;
-    }
+      
       
     public void cadastrarMarca(Marca obj){
          
