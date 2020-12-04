@@ -11,4 +11,10 @@ package eletronico.model.entidade;
  */
 public class Produto {
     private int codProduto;
+    
+    private String nome;
+    
+    private Categoria categoria;
+    
+    private Marca marca;
 }

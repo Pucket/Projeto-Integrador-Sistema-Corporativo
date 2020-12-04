@@ -5,17 +5,25 @@
  */
 package eletronico;
 
+import eletronico.model.controller.MarcaController;
+import eletronico.model.entidade.Marca;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Kenede
  */
 public class TelaMarca extends javax.swing.JFrame {
-
+    DefaultTableModel model = new DefaultTableModel();
+    
     /**
      * Creates new form TelaMarca
      */
     public TelaMarca() {
         initComponents();
+        model = new DefaultTableModel();
+        jButton1.doClick();
     }
 
     /**
@@ -42,6 +50,11 @@ public class TelaMarca extends javax.swing.JFrame {
         jLabel1.setText("Nome da Marca:");
 
         jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +167,23 @@ public class TelaMarca extends javax.swing.JFrame {
         TelaCadastrarMarca cadastro = new TelaCadastrarMarca();
      cadastro.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        model.setNumRows(0);
+        
+        String[] colunas = {"código", "nome"};
+        model.setColumnIdentifiers(colunas);
+        
+        MarcaController controller = new MarcaController();
+        List<Marca> lista = controller.listar(jTextField1.getText());
+        
+        for (Marca marca : lista){
+            Object[] info = {marca.getCodMarca(), marca.getNome() };
+            model.addRow(info);
+        }
+        jTable1.setModel(model);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
