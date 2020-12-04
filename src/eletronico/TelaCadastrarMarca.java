@@ -5,12 +5,16 @@
  */
 package eletronico;
 
+import eletronico.model.controller.MarcaController;
+import eletronico.model.entidade.Marca;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kenede
  */
 public class TelaCadastrarMarca extends javax.swing.JFrame {
-
+    String id = "";
     /**
      * Creates new form TelaCadastrarMarca
      */
@@ -108,6 +112,30 @@ public class TelaCadastrarMarca extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(id.equals("")){
+        Marca obj = new Marca();
+        obj.setNome(jTextField1.getText());
+                
+        MarcaController controller = new MarcaController ();
+        controller.cadastrarMarca(obj);
+        
+        JOptionPane.showMessageDialog(this, "Marca Cadastrado" + " com sucesso.");
+        
+        } else{
+           
+        Marca obj = new Marca();
+        
+        obj.setNome(jTextField1.getText());
+        
+        MarcaController controller = new MarcaController ();
+        controller.alterarMarca(obj);  
+           
+        JOptionPane.showMessageDialog(this, "Marca alterada ");
+        }
+        
+        TelaMarca telaMarca = new TelaMarca();
+        telaMarca.setVisible(false);
+        telaMarca.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

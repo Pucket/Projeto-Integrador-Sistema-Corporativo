@@ -5,17 +5,24 @@
  */
 package eletronico;
 
+import eletronico.model.controller.CategoriaController;
+import eletronico.model.entidade.Categoria;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Leonardo
  */
 public class TelaCategoria extends javax.swing.JFrame {
-
+    DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form TelaCategoria
      */
     public TelaCategoria() {
         initComponents();
+        model = new DefaultTableModel();
+        jButton1.doClick();
     }
 
     /**
@@ -142,6 +149,19 @@ public class TelaCategoria extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         model.setNumRows(0);
+        
+        String[] colunas = {"código", "nome"};
+        model.setColumnIdentifiers(colunas);
+        
+        CategoriaController controller = new CategoriaController();
+        List<Categoria> lista = controller.listar(jTextField1.getText());
+        
+        for (Categoria categoria : lista){
+            Object[] info = {categoria.getCodCategoria(), categoria.getNome() };
+            model.addRow(info);
+        }
+        jTable1.setModel(model);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

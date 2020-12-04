@@ -5,17 +5,23 @@
  */
 package eletronico;
 
+import eletronico.model.controller.CategoriaController;
+import eletronico.model.entidade.Categoria;
+import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.runtime.Debug.id;
+
 /**
  *
  * @author Leonardo
  */
 public class TelaCadastrarCategoria extends javax.swing.JFrame {
-
+    String id = "";
     /**
      * Creates new form TelaCadastrarCategoria
      */
     public TelaCadastrarCategoria() {
         initComponents();
+        
     }
 
     /**
@@ -99,6 +105,30 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(id.equals("")){
+        Categoria obj = new Categoria();
+        obj.setNome(jTextField1.getText());
+                
+        CategoriaController controller = new CategoriaController ();
+        controller.cadastrarCategoria(obj);
+        
+        JOptionPane.showMessageDialog(this, "Categoria Cadastrada" + " com sucesso.");
+        
+        } else{
+           
+        Categoria obj = new Categoria();
+        
+        obj.setNome(jTextField1.getText());
+        
+        CategoriaController controller = new CategoriaController ();
+        controller.alterarCategoria(obj);  
+           
+        JOptionPane.showMessageDialog(this, "Categoria alterada ");
+        }
+        
+        TelaCategoria telaCategoria = new TelaCategoria();
+        telaCategoria.setVisible(false);
+        telaCategoria.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
