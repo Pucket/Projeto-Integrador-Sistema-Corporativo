@@ -6,7 +6,9 @@
 package eletronico;
 
 import eletronico.model.controller.CategoriaController;
+import eletronico.model.controller.MarcaController;
 import eletronico.model.entidade.Categoria;
+import eletronico.model.entidade.Marca;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -24,11 +26,20 @@ public class CadastrarProduto extends javax.swing.JFrame {
         CaixaCategoria.removeAllItems();
         DefaultComboBoxModel model = new DefaultComboBoxModel();
         CategoriaController catController = new CategoriaController();
-        List<Categoria> lista = catController.listar("");
-        for (Categoria c : lista){
+        List<Categoria> listaCategoria = catController.listar("");
+        for (Categoria c : listaCategoria){
             model.addElement(new ComboItem(Integer.toString(c.getCodCategoria()), c.getNome()));
         }
         CaixaCategoria.setModel(model);
+        
+         CaixaMarca.removeAllItems();
+        DefaultComboBoxModel marca = new DefaultComboBoxModel();
+        MarcaController marController = new MarcaController();
+        List<Marca> listaMarca = marController.listar("");
+        for (Marca m : listaMarca){
+            marca.addElement(new ComboItem(Integer.toString(m.getCodMarca()), m.getNome()));
+        }
+        CaixaMarca.setModel(marca);
     }
 
     /**
@@ -56,9 +67,14 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Ok");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Cancelar");
 
         jLabel1.setText("Nome do produto:");
 
@@ -99,8 +115,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -116,11 +132,11 @@ public class CadastrarProduto extends javax.swing.JFrame {
                             .addComponent(jTextField2)
                             .addComponent(jTextField3)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(jButton2)
-                        .addGap(37, 37, 37)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
@@ -156,7 +172,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -173,6 +189,10 @@ public class CadastrarProduto extends javax.swing.JFrame {
     private void CaixaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaixaCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CaixaCategoriaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
