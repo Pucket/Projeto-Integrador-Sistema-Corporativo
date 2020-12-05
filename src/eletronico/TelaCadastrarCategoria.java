@@ -19,8 +19,20 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
     /**
      * Creates new form TelaCadastrarCategoria
      */
+    public TelaCadastrarCategoria(String id) {
+     initComponents();
+        
+        CategoriaController Controller = new CategoriaController ();
+        Categoria c = Controller.Buscar(id);
+        
+        txtNome.setText(c.getNome());
+        
+        this.id = String.valueOf(c.getCodCategoria());
+    }
+    
     public TelaCadastrarCategoria() {
         initComponents();
+        
         
     }
 
@@ -35,7 +47,7 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -81,7 +93,7 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,7 +104,7 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,7 +119,7 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(id.equals("")){
         Categoria obj = new Categoria();
-        obj.setNome(jTextField1.getText());
+        obj.setNome(txtNome.getText());
                 
         CategoriaController controller = new CategoriaController ();
         controller.cadastrarCategoria(obj);
@@ -118,7 +130,9 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
            
         Categoria obj = new Categoria();
         
-        obj.setNome(jTextField1.getText());
+        obj.setNome(txtNome.getText());
+        
+        obj.setCodCategoria(Integer.parseInt(id));
         
         CategoriaController controller = new CategoriaController ();
         controller.alterarCategoria(obj);  
@@ -175,6 +189,6 @@ public class TelaCadastrarCategoria extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

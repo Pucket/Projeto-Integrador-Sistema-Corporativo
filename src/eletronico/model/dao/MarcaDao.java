@@ -29,7 +29,7 @@ public class MarcaDao {
               DriverManager
                 .getConnection
                 ("jdbc:mysql://localhost:3306/produtos_eletronicos", 
-                 "root", "");
+                 "root", "joyce@fps1995");
             String sql = "select * "
                 + "from marca "
                 + "where nome like ? "    
@@ -65,7 +65,7 @@ public class MarcaDao {
          try {
              
         Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
         
         String sql  = "insert into marca " + "(nome) values" + "(?)";
         
@@ -85,7 +85,7 @@ public class MarcaDao {
      public void alterarMarca(Marca obj){
          try {
          Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
         
         String sql = "update marca " + "set nome = ? "
                    + " where codMarca = ? ";
@@ -108,7 +108,7 @@ public class MarcaDao {
           Marca m = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
             
             String sql = "select * " + "from marca " + "where codMarca = ?";
             
@@ -134,7 +134,7 @@ public class MarcaDao {
         
           try{
               Class.forName("com.mysql.jdbc.Driver");
-              Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
+              Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
               String sql = "delete from marca " + "where codMarca = ?";
               PreparedStatement ps = con.prepareStatement(sql);
               ps.setString(1, id);
