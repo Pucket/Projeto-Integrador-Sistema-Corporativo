@@ -29,7 +29,7 @@ public class CategoriaDao {
               DriverManager
                 .getConnection
                 ("jdbc:mysql://localhost:3306/produtos_eletronicos", 
-                 "root", "joyce@fps1995");
+                 "root", "");
             String sql = "select * "
                 + "from categoria "
                 + "where nome like ? "    
@@ -63,7 +63,7 @@ public void cadastrarCategoria(Categoria obj){
     try {
              
         Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
         
         String sql  = "insert into categoria " + "(nome) values" + "(?)";
         
@@ -81,7 +81,7 @@ public void cadastrarCategoria(Categoria obj){
 public void alterarCategoria(Categoria obj){
          try {
          Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
         
         String sql = "update categoria " + "set nome = ? "
                    + " where codCategoria = ? ";
@@ -106,7 +106,7 @@ public Categoria Buscar(String id){
           Categoria c = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
             
             String sql = "select * " + "from categoria " + "where codCategoria = ?";
             
@@ -133,7 +133,7 @@ public void Excluir(String id){
         
         try{
            Class.forName("com.mysql.jdbc.Driver");
-           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "joyce@fps1995");
+           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
               
            String sql = "delete from categoria " + "where codCategoria = ?";
               

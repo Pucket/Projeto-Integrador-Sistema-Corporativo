@@ -5,17 +5,26 @@
  */
 package eletronico;
 
+import eletronico.model.controller.ProdutoController;
+import eletronico.model.entidade.Produto;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author edson
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-
+    DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form TelaPrincipal
      */
     public TelaPrincipal() {
         initComponents();
+        
+        model = new DefaultTableModel();
+        jButton1.doClick();
     }
 
     /**
@@ -102,6 +111,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 51, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Consultar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -145,6 +159,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setText("Excluir");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jTable2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jTable2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -251,6 +270,40 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaCategoria telaCategoria = new TelaCategoria();
       telaCategoria.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+            model.setNumRows(0);
+        
+        String[] colunas = {"Código", "Nome", "Preço" , "Marca" };
+        model.setColumnIdentifiers(colunas);
+        
+        ProdutoController controller = new ProdutoController();
+        List<Produto> lista = controller.listarProduto(txtPesquisa.getText());
+        
+        for (Produto produto : lista){
+            Object[] info = {produto.getCodProduto(), produto.getNome(), produto.getPreco(), produto.getMarca().getNome()
+            };
+            model.addRow(info);
+        }
+        jTable2.setModel(model);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir esse contato?" , "Exclusão" 
+         , JOptionPane.YES_NO_OPTION);
+        
+        if (resposta == 0) {
+          String id =  jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString();
+       
+            ProdutoController controller = new ProdutoController ();
+            controller.ExcluirProduto(id);
+         
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
