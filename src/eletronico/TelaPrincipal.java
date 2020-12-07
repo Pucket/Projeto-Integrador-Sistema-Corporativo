@@ -7,6 +7,7 @@ package eletronico;
 
 import eletronico.model.controller.ProdutoController;
 import eletronico.model.entidade.Produto;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -287,8 +288,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ProdutoController controller = new ProdutoController();
         List<Produto> lista = controller.listarProduto(txtPesquisa.getText());
         
+        DecimalFormat formato = new DecimalFormat("R$ ###0.00");
+        
         for (Produto produto : lista){
-            Object[] info = {produto.getCodProduto(), produto.getNome(), produto.getPreco(), produto.getMarca().getNome()
+            String strValor = formato.format(produto.getPreco());
+            Object[] info = {produto.getCodProduto(), produto.getNome(), strValor, produto.getMarca().getNome()
             };
             model.addRow(info);
         }

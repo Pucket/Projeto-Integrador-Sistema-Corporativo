@@ -188,7 +188,7 @@ public class TelaCategoria extends javax.swing.JFrame {
     private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
         // TODO add your handling code here: EXCLUIR
        
-        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir essa Ctegoria ?", "Excluir", JOptionPane.YES_NO_OPTION);
+        int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir essa Categoria ?", "Excluir", JOptionPane.YES_NO_OPTION);
         
         
         if (resposta == 0) {
