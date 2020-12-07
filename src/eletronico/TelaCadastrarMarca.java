@@ -18,8 +18,21 @@ public class TelaCadastrarMarca extends javax.swing.JFrame {
     /**
      * Creates new form TelaCadastrarMarca
      */
+    public TelaCadastrarMarca(String id) {
+     initComponents();
+        
+        MarcaController Controller = new MarcaController ();
+        Marca m = Controller.Buscar(id);
+        
+        jTextField1.setText(m.getNome());
+        
+        this.id = String.valueOf(m.getCodMarca());
+    }
+    
     public TelaCadastrarMarca() {
         initComponents();
+        
+        
     }
 
     /**
