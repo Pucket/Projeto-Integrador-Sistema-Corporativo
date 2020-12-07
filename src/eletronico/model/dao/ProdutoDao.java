@@ -80,7 +80,7 @@ public class ProdutoDao {
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/produtos_eletronicos" , "root" , "");
         
-        String sql  = "insert into produtos " + "(nome, preco, quantidade, cod_categoria, cod_marca)  values" + "(?)";
+        String sql  = "insert into produtos " + "(nome, preco, quantidade, cod_categoria, cod_marca)  values" + "(?, ?, ?, ?, ?)";
         
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, obj.getNome());

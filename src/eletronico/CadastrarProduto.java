@@ -7,17 +7,20 @@ package eletronico;
 
 import eletronico.model.controller.CategoriaController;
 import eletronico.model.controller.MarcaController;
+import eletronico.model.controller.ProdutoController;
 import eletronico.model.entidade.Categoria;
 import eletronico.model.entidade.Marca;
+import eletronico.model.entidade.Produto;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author suely
  */
 public class CadastrarProduto extends javax.swing.JFrame {
-
+    String id = "";
     /**
      * Creates new form CadastrarMarca
      */
@@ -40,8 +43,47 @@ public class CadastrarProduto extends javax.swing.JFrame {
             marca.addElement(new ComboItem(Integer.toString(m.getCodMarca()), m.getNome()));
         }
         CaixaMarca.setModel(marca);
+        
+        
     }
-
+    
+    public CadastrarProduto(String id){
+        initComponents();
+        ProdutoController Controller = new ProdutoController ();
+        Produto p = Controller.BuscarProduto(id);
+        
+        jTextField1.setText(p.getNome());
+        jTextField2.setText(String.valueOf(p.getPreco()));
+        jTextField3.setText(String.valueOf(p.getQuantidade()));
+        
+        CaixaCategoria.removeAllItems();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        CategoriaController catController = new CategoriaController();
+        List<Categoria> listaCategoria = catController.listar("");
+        for (Categoria c : listaCategoria){
+            model.addElement(new ComboItem(Integer.toString(c.getCodCategoria()), c.getNome()));
+        }
+        CaixaCategoria.setModel(model);
+        
+         CaixaMarca.removeAllItems();
+        DefaultComboBoxModel marca = new DefaultComboBoxModel();
+        MarcaController marController = new MarcaController();
+        List<Marca> listaMarca = marController.listar("");
+        for (Marca m : listaMarca){
+            marca.addElement(new ComboItem(Integer.toString(m.getCodMarca()), m.getNome()));
+        }
+        CaixaMarca.setModel(marca);
+          
+        CaixaCategoria.getModel().setSelectedItem( new ComboItem( 
+            Integer.toString(p.getCategoria().getCodCategoria()), 
+                p.getCategoria().getNome() ));
+        
+        CaixaMarca.getModel().setSelectedItem( new ComboItem( 
+            Integer.toString(p.getMarca().getCodMarca()), 
+                p.getMarca().getNome() ));
+        
+        this.id = String.valueOf(p.getCodProduto());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,6 +234,70 @@ public class CadastrarProduto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(id.equals("")){
+        Produto obj = new Produto();
+        obj.setNome(jTextField1.getText());
+        obj.setPreco(Double.parseDouble(jTextField2.getText()));
+        obj.setQuantidade(Integer.parseInt(jTextField3.getText()));
+        Object caixa1 = CaixaCategoria.getSelectedItem();
+        
+        Categoria categoria = new Categoria();
+        
+        categoria.setCodCategoria(Integer.parseInt( ((ComboItem)caixa1).getId() ));
+        categoria.setNome( ((ComboItem) caixa1).getNome() );
+
+        obj.setCategoria( categoria );
+        
+        Object caixa2 = CaixaMarca.getSelectedItem();
+        
+        Marca marca = new Marca();
+        
+        marca.setCodMarca(Integer.parseInt(((ComboItem)caixa2).getId()));
+        marca.setNome(((ComboItem)caixa2).getNome());
+        
+        obj.setMarca(marca);
+        
+        ProdutoController controller = new ProdutoController ();
+        controller.cadastrarProduto(obj);
+        
+        JOptionPane.showMessageDialog(this, "Produto Cadastrado" + " com sucesso.");
+        
+        } else{
+           
+        Produto obj = new Produto();
+        
+        obj.setCodProduto(Integer.parseInt(id));
+        obj.setNome(jTextField1.getText());
+        obj.setPreco(Double.parseDouble(jTextField2.getText()));
+        obj.setQuantidade(Integer.parseInt(jTextField3.getText()));
+        
+        Object caixa1 = CaixaCategoria.getSelectedItem();
+        
+        Categoria categoria = new Categoria();
+        
+        categoria.setCodCategoria(Integer.parseInt( ((ComboItem)caixa1).getId() ));
+        categoria.setNome( ((ComboItem) caixa1).getNome() );
+
+        obj.setCategoria( categoria );
+        
+        Object caixa2 = CaixaMarca.getSelectedItem();
+        
+        Marca marca = new Marca();
+        
+        marca.setCodMarca(Integer.parseInt(((ComboItem)caixa2).getId()));
+        marca.setNome(((ComboItem)caixa2).getNome());
+        
+        obj.setMarca(marca);
+        
+        ProdutoController controller = new ProdutoController ();
+        controller.alterarProduto(obj);  
+           
+        JOptionPane.showMessageDialog(this, "Produto alterado ");
+        }
+        
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
+        telaPrincipal.setVisible(false);
+        telaPrincipal.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
